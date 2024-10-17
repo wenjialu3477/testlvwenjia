@@ -1,26 +1,27 @@
-name: Playwright Tests
-on: [pull_request]
+image: mcr.microsoft.com/playwright:focal
 
-jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Build
-      run: npm run build
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+stages:
+  - test
+
+e2e:
+  stage: test
+  script:
+    - cd docs/
+    - npm install playwright
+    - npm install @playwright/test
+    - npx playwright test
+  retry:
+    max: 2
+    when:
+    - runner_system_failure
+  only:
+    - web
+  artifacts:
+    when: always
+    name: "results"
+    paths:
+      - docs/*
+    exclude:
+      - docs/testcodes/*
+      - docs/node_modules/*
+      - docs/*.ts
