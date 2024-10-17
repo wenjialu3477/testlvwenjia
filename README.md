@@ -31,6 +31,9 @@ setHopedJobCondition.spec.ts
 期待結果：
 削除ボタン、保存日が表示されていること
 
+
+
+
 2.BizReach希望求人条件の設定テスト
 
 setSearchingJobConditions.spec.ts
