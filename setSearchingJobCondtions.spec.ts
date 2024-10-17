@@ -61,4 +61,15 @@ test('希望求人条件の設定', async ({ page }) => {
   // 保存
   await page.getByRole('button', { name: '保存' }).click();
 
+　//　アフター処理:保存した希望条件を解除して保存
+  await button.click();
+  await page.getByRole('button', { name: jobLabelName }).getByRole('button').click();
+  await page.getByRole('button', { name: industryLabelName }).getByRole('button').click();
+  await page.getByLabel(locationLabelName).check();
+  await page.getByLabel(globalBusinessLabelName).click();
+  await page.getByLabel(stockOptionsLabelName).check();
+  await page.getByLabel(socialContributionLabelName).check();
+  await page.getByLabel(managementLabelName).check();
+  await page.getByRole('button', { name: '保存' }).click();
+
 });
