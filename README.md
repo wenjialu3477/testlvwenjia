@@ -1,6 +1,6 @@
 1.BizReach求人検索条件設定テスト
 
-setHopedJobCondition.spec.ts
+testlvwenjia/tests/setHopedJobCondition.spec.ts
 
 
 
@@ -36,7 +36,7 @@ setHopedJobCondition.spec.ts
 
 2.BizReach希望求人条件の設定テスト
 
-setSearchingJobConditions.spec.ts
+testlvwenjia/tests/setSearchingJobConditions.spec.ts
 
 
 
