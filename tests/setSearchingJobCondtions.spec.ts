@@ -63,7 +63,7 @@ test('希望求人条件の設定', async ({ page }) => {
 
   //　保存した後自動に希望条件画面に遷移したかを確認
   const targetURL = 'https://www.bizreach.jp/resume/desire/';
-  await page.waitForTimeout(3000);
+  await button.waitFor(); // 編集ボタンが表示されるまで待機(編集ボタンが希望条件画面に表示されているため)
   expect(page.url()).toBe(targetURL);
 
   //　アフター処理:保存した希望条件を解除して保存
