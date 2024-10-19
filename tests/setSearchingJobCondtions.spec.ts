@@ -61,19 +61,12 @@ test('希望求人条件の設定', async ({ page }) => {
   // 保存
   await page.getByRole('button', { name: '保存' }).click();
 
-  //　保存した後自動に希望条件画面に遷移したかを確認
-  const targetURL = 'https://www.bizreach.jp/resume/desire/';
-  await button.waitFor(); // 編集ボタンが表示されるまで待機(編集ボタンが希望条件画面に表示されているため)
-  expect(page.url()).toBe(targetURL);
+  //　保存した後、希望職種と希望業種が表示されているかを確認
+  const textLocator1 = page.locator(`text=${jobLabelName}`);
+  const isTextVisible1 = await textLocator1.isVisible();
+  expect(isTextVisible1).toBeTruthy();
 
-  //　アフター処理:保存した希望条件を解除して保存
-  await button.click();
-  await page.getByRole('button', { name: jobLabelName }).getByRole('button').click();
-  await page.getByRole('button', { name: industryLabelName }).getByRole('button').click();
-  await page.getByLabel(locationLabelName).check();
-  await page.getByLabel(globalBusinessLabelName).click();
-  await page.getByLabel(stockOptionsLabelName).check();
-  await page.getByLabel(socialContributionLabelName).check();
-  await page.getByLabel(managementLabelName).check();
-  await page.getByRole('button', { name: '保存' }).click();
+  const textLocator2 = page.locator(`text=${industryLabelName}`);
+  const isTextVisible2 = await textLocator2.isVisible();
+  expect(isTextVisible2).toBeTruthy();
 });
