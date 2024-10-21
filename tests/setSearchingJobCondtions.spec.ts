@@ -14,11 +14,16 @@ const industryOptionName = '不動産';
 const industryLabelName = 'デベロッパー';
 
 // 希望条件に関する設定
-const locationLabelName = '関西';
-const globalBusinessLabelName = 'グローバル事業に携わりたい';
+const locationLabelName = '大阪府';
 const stockOptionsLabelName = 'ストックオプションが欲しい';
 const socialContributionLabelName = '社会に貢献したい';
 const managementLabelName = 'マネジメントをしたい';
+
+//　希望年収に関する設定
+const salaryCondtions = '問わない（上下限なし）';
+
+// 転職希望時期に関する設定
+const jobChangeTiming = '3カ月以内に';
 
 test('希望求人条件の設定', async ({ page }) => {
     // ログインページにアクセスしてログイン
@@ -53,20 +58,50 @@ test('希望求人条件の設定', async ({ page }) => {
 
   // その他の希望条件の設定
   await page.getByLabel(locationLabelName).check();
-  await page.getByLabel(globalBusinessLabelName).click();
   await page.getByLabel(stockOptionsLabelName).check();
   await page.getByLabel(socialContributionLabelName).check();
   await page.getByLabel(managementLabelName).check();
-  
+
+  // 希望年収の設定
+  await page.locator('xpath=//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[5]/div/div/div').click();
+  await page.getByRole('option', { name: salaryCondtions }).click();
+
+  //　転職希望時期の設定
+  await page.locator('xpath=//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[6]/div/div/div').click();
+  await page.getByRole('option', { name: jobChangeTiming }).click();
+
   // 保存
   await page.getByRole('button', { name: '保存' }).click();
 
-  //　保存した後、希望職種と希望業種が表示されているかを確認
+  //　保存した後、入力した内容が表示されているかを確認
+  //　希望職種
   const textLocator1 = page.locator(`text=${jobLabelName}`);
   const isTextVisible1 = await textLocator1.isVisible();
   expect(isTextVisible1).toBeTruthy();
-
+  //　希望業種
   const textLocator2 = page.locator(`text=${industryLabelName}`);
   const isTextVisible2 = await textLocator2.isVisible();
   expect(isTextVisible2).toBeTruthy();
+  //　希望勤務地
+  const textLocator3 = page.locator(`text=${locationLabelName}`);
+  const isTextVisible3 = await textLocator3.isVisible();
+  expect(isTextVisible3).toBeTruthy();
+  //　興味がある働き方
+  const textLocator4 = page.locator(`text=${stockOptionsLabelName}`);
+  const isTextVisible4 = await textLocator4.isVisible();
+  expect(isTextVisible4).toBeTruthy();
+  const textLocator5 = page.locator(`text=${socialContributionLabelName}`);
+  const isTextVisible5 = await textLocator5.isVisible();
+  expect(isTextVisible5).toBeTruthy();
+  const textLocator6 = page.locator(`text=${managementLabelName}`);
+  const isTextVisible6 = await textLocator6.isVisible();
+  expect(isTextVisible6).toBeTruthy();
+  //　希望年収
+  const textLocator7 = page.locator(`text=${salaryCondtions}`);
+  const isTextVisible7 = await textLocator7.isVisible();
+  expect(isTextVisible7).toBeTruthy();
+  //　転職希望時期
+  const textLocator8 = page.locator(`text=${jobChangeTiming}`);
+  const isTextVisible8 = await textLocator8.isVisible();
+  expect(isTextVisible8).toBeTruthy();
 });
