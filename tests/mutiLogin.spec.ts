@@ -20,7 +20,7 @@ test.describe('Login Test with multiple accounts', () => {
         await page.getByTestId('form-input__password').fill(password);
         await page.getByTestId('form__submit-button').click();
 
-      // ログイン後のページを確認 (例えば、ダッシュボードページに遷移することを確認)
+      // ログイン後のページを確認 (マイページに遷移することを確認)
       await page.waitForURL(afterURL);
 
       // 期待されるURLかどうかを確認
