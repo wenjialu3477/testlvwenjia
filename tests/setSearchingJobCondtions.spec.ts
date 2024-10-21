@@ -44,9 +44,8 @@ test('希望求人条件の設定', async ({ page }) => {
   await button.waitFor(); // 編集ボタンが表示されるまで待機
   await button.click();
   const plusbutton = page.getByRole('button', { name:  '+ 希望職種を選択' });
-  await plusbutton.waitFor(); // 希望条件リンクが表示されるまで待機
-  await plusbutton.click();
-  await page.getByRole('button', { name:  '+ 希望職種を選択' }).click();
+  await plusbutton.waitFor(); // + 希望職種を選択ボタンが表示されるまで待機
+  await page.locator('//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[1]/div/button').click();
   await page.getByLabel('希望職種を選択してください（最大3つまで）').getByPlaceholder('選択してください').click();
   await page.getByRole('option', { name: jobOptionName, exact: true }).click();
   await page.getByLabel(jobLabelName).check();
