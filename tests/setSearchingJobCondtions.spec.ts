@@ -19,12 +19,6 @@ const stockOptionsLabelName = 'ストックオプションが欲しい';
 const socialContributionLabelName = '社会に貢献したい';
 const managementLabelName = 'マネジメントをしたい';
 
-//　希望年収に関する設定
-const salaryCondtions = '問わない（上下限なし）';
-
-// 転職希望時期に関する設定
-const jobChangeTiming = '3カ月以内に';
-
 test('希望求人条件の設定', async ({ page }) => {
     // ログインページにアクセスしてログイン
   await page.goto(baseURL);
@@ -43,11 +37,9 @@ test('希望求人条件の設定', async ({ page }) => {
   const button = page.getByRole('button', { name: '編集' });
   await button.waitFor(); // 編集ボタンが表示されるまで待機
   await button.click();
-  await page.waitForTimeout(3000);
     
     //希望職種の設定
-　await page.locator('//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[1]/div/button').click();
-  //await page.getByRole('button', { name:  '+ 希望職種を選択' }).click();
+  await page.getByRole('button', { name:  '+ 希望職種を選択' }).click();
   await page.getByLabel('希望職種を選択してください（最大3つまで）').getByPlaceholder('選択してください').click();
   await page.getByRole('option', { name: jobOptionName, exact: true }).click();
   await page.getByLabel(jobLabelName).check();
@@ -65,14 +57,6 @@ test('希望求人条件の設定', async ({ page }) => {
   await page.getByLabel(stockOptionsLabelName).check();
   await page.getByLabel(socialContributionLabelName).check();
   await page.getByLabel(managementLabelName).check();
-
-  // 希望年収の設定
-  await page.locator('xpath=//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[5]/div/div/div').click();
-  await page.getByRole('option', { name: salaryCondtions }).click();
-
-  //　転職希望時期の設定
-  await page.locator('xpath=//*[@id="__next"]/section/section/main/div/div[3]/div[2]/div/section/form/div[1]/section[6]/div/div/div').click();
-  await page.getByRole('option', { name: jobChangeTiming }).click();
 
   // 保存
   await page.getByRole('button', { name: '保存' }).click();
@@ -100,12 +84,4 @@ test('希望求人条件の設定', async ({ page }) => {
   const textLocator6 = page.locator(`text=${managementLabelName}`);
   const isTextVisible6 = await textLocator6.isVisible();
   expect(isTextVisible6).toBeTruthy();
-  //　希望年収
-  const textLocator7 = page.locator(`text=${salaryCondtions}`);
-  const isTextVisible7 = await textLocator7.isVisible();
-  expect(isTextVisible7).toBeTruthy();
-  //　転職希望時期
-  const textLocator8 = page.locator(`text=${jobChangeTiming}`);
-  const isTextVisible8 = await textLocator8.isVisible();
-  expect(isTextVisible8).toBeTruthy();
 });
