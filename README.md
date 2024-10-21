@@ -63,3 +63,22 @@ testlvwenjia/tests/setSearchingJobConditions.spec.ts
 
 期待結果：
 入力した情報が画面上に表示されていること
+
+
+3.複数ログインするテスト（駆動テスト）
+
+testlvwenjia/tests/multiLogin.spec.ts
+
+
+
+テスト内容：
+複数のアカウントでビスリーチにログインできるかを確認する
+
+テスト手順：
+・複数のアカウントでビズリーチにログインする
+
+・ログイン後のページのURLを確認する
+
+
+期待結果：
+ログイン後、マイページ画面に遷移したこと
