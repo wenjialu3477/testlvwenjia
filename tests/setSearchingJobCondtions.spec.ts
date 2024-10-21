@@ -39,10 +39,13 @@ test('希望求人条件の設定', async ({ page }) => {
   await link.waitFor(); // 希望条件リンクが表示されるまで待機
   await link.click();
 
-    //希望職種の設定
+    //希望条件設定画面に遷移
   const button = page.getByRole('button', { name: '編集' });
   await button.waitFor(); // 編集ボタンが表示されるまで待機
   await button.click();
+  await page.waitForTimeout(3000);
+    
+    //希望職種の設定
   await page.getByRole('button', { name:  '+ 希望職種を選択' }).click();
   await page.getByLabel('希望職種を選択してください（最大3つまで）').getByPlaceholder('選択してください').click();
   await page.getByRole('option', { name: jobOptionName, exact: true }).click();
